@@ -1,9 +1,9 @@
 import pandas as pd
 import os 
 import numpy as np
-from config import TESTING_IMAGES_PATH, TRAIN_IMG_PATH
+from src.config import TESTING_IMAGES_PATH, TRAIN_IMG_PATH
 import tensorflow as tf
-from data_handle import decode_dicom, decode_jpeg
+from src.data_handle import decode_dicom, decode_jpeg
 import cv2
 
 TESTING_IMAGES_PATH = TRAIN_IMG_PATH

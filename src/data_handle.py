@@ -1,7 +1,7 @@
 import numpy as np
 import os 
 import tensorflow as tf
-from config import TRAIN_IMG_PATH, IMAGE_SIZE, TARGET_CLASSES, TRAIN_LABEL_PATH, AUTOTUNE, BATCH_SIZE
+from src.config import TRAIN_IMG_PATH, IMAGE_SIZE, TARGET_CLASSES, TRAIN_LABEL_PATH, AUTOTUNE, BATCH_SIZE
 import pandas as pd
 import cv2 
 import pydicom as dicom

@@ -1,7 +1,7 @@
-from config import BATCH_SIZE, EPOCHS
+from src.config import BATCH_SIZE, EPOCHS
 import os
-from data_handle import decode_dicom, build_dataset
-from model import build_model
+from src.data_handle import decode_dicom, build_dataset
+from src.model import build_model
 import time 
 
 

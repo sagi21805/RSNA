@@ -1,5 +1,5 @@
 import tensorflow as tf
-from config import IMAGE_SIZE, BATCH_SIZE, L2_REGULATOR
+from src.config import IMAGE_SIZE, BATCH_SIZE, L2_REGULATOR
 
 with tf.device('/device:GPU:0'):
 
