@@ -1,0 +1,89 @@
+from python import Python
+from time import now
+from tensor import Tensor, TensorSpec, TensorShape
+from utils.vector import InlinedFixedVector as Vector
+from time import now
+from random import rand
+from utils.index import Index
+
+
+fn numpy_to_dimIndex_2d(numpy_arr: PythonObject) raises -> Tensor[DType.int8]:
+    let height = numpy_arr.shape[0].__index__()
+    let width = numpy_arr.shape[1].__index__()
+    let spec = TensorSpec(DType.int8, height, width)
+    var tensor_img = Tensor[DType.int8](spec)
+
+
+
+    for y in range(height):
+        for x in range(width):
+            tensor_img[y][x] = numpy_arr[y][x].__index__()
+
+            
+
+    return tensor_img
+
+
+
+# fn sliding_window(img: PythonObject, block_size: Int) raises: #accepts numpy array!
+
+#     #stride is always one
+#     print(img)
+
+#     if (img.size[0] < block_size or img.size[1] < block_size):
+#         raise Error("img size cannot be smaller than the block size")
+    
+#     let np = Python.import_module("numpy")
+    
+#     print(block)
+#     for y in range(img.size[1] - block_size + 1):
+#         for x in range(img.size[0] - block_size + 1):
+#             # for n in range(block_size):
+#             #     for k in range(block_size):
+#                     # block[n][k] = img[y+n][x+k]
+#             print(block)
+# fn gray_scale(image: PythonObject) raises:
+
+#     # Create the tensor of dimensions height, width, channels
+#     # and fill with random values.
+#     let dim_tensor = numpy_to_dimIndex_2d(image)
+
+#     let height = dim_tensor.__getitem__(0)
+#     let width = dim_tensor.__getitem__(1)
+#     # Declare the grayscale image.
+#     let spec = TensorSpec(DType.float32, height, width)
+#     var gray_scale_image = Tensor[DType.float32](spec)
+
+#     # Perform the RGB to grayscale transform.
+#     for y in range(height):
+#         for x in range(width):
+#             let r = image[y,x,0]
+#             let g = image[y,x,1]
+#             let b = image[y,x,2]
+#             gray_scale_image[Index(y,x)] = 0.299 * r + 0.587 * g + 0.114 * b
+
+#     print(gray_scale_image.shape().__str__())
+    
+
+        
+
+fn main() raises:
+    let numpy = Python.import_module("numpy")
+    let PIL = Python.import_module("PIL")
+    let cv2 = Python.import_module("cv2")
+    let plt = Python.import_module("matplotlib.pyplot")
+
+    let vid = cv2.VideoCapture(0)
+    let ax1 = plt.subplot()
+    let im1 = ax1.imshow(vid.read()[1])
+
+    _ = plt.ion()
+    while True:
+        var img = vid.read()[1]
+        img = PIL.Image.fromarray(img) 
+        let gray_img = numpy.array(img.convert("L"))
+        _ = im1.set_data(gray_img)
+        _ = plt.pause(0.0001)
+        let t = now()
+        _ = numpy_to_dimIndex_2d(gray_img)
+        print(now() - t)
