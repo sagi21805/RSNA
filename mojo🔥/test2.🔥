@@ -8,7 +8,8 @@ from utils.index import Index
 
 
 fn numpy_to_dimIndex_2d(numpy_arr: PythonObject) raises -> Tensor[DType.int8]:
-    let height = numpy_arr.shape[0].__index__()
+    
+    let height = numpy_arr.shape[0].to_float64().to_int()
     let width = numpy_arr.shape[1].__index__()
     let spec = TensorSpec(DType.int8, height, width)
     var tensor_img = Tensor[DType.int8](spec)
@@ -84,6 +85,4 @@ fn main() raises:
         let gray_img = numpy.array(img.convert("L"))
         _ = im1.set_data(gray_img)
         _ = plt.pause(0.0001)
-        let t = now()
         _ = numpy_to_dimIndex_2d(gray_img)
-        print(now() - t)

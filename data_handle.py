@@ -11,18 +11,18 @@ def decode_dicom(img_path):
     image = dicom.dcmread(img_path).pixel_array
     image = cv2.resize(image, IMAGE_SIZE)
     image = tf.constant(image, tf.float32) / 255.0
-    return tf.reshape(image, [1] + IMAGE_SIZE)
+    return tf.reshape(image, IMAGE_SIZE + [3, ])
 
 def decode_jpeg(img_path):
-    image = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2GRAY)
+    image = cv2.imread(img_path)
     image = cv2.resize(image, IMAGE_SIZE)
     image = tf.constant(image, tf.float32) / 255.0
-    return tf.reshape(image, [1] + IMAGE_SIZE)
+    return tf.reshape(image, [3, ] + IMAGE_SIZE)
     
 def decode_image_and_label(img_path: str, label):
     file_bytes = tf.io.read_file(img_path)
-    image = tf.io.decode_jpeg(file_bytes)
-    image = tf.reshape(image, IMAGE_SIZE)
+    image = tf.io.decode_jpeg(file_bytes, channels=3)
+    image = tf.image.resize(image, IMAGE_SIZE)
     image = tf.cast(image, tf.float32) / 255.0
     label = tf.cast(label, tf.float32)
     #         bowel       extra      kidney      liver       spleen

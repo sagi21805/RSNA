@@ -4,10 +4,11 @@ from config import IMAGE_SIZE, BATCH_SIZE, L2_REGULATOR
 with tf.device('/device:GPU:0'):
 
     def build_model():
-        inputs = tf.keras.Input(shape=IMAGE_SIZE, batch_size=BATCH_SIZE)
+        inputs = tf.keras.Input(shape=IMAGE_SIZE + [3, ], batch_size=BATCH_SIZE)
         
+        conv = tf.keras.layers.Conv2D(2, 5, activation=tf.keras.activations.selu, kernel_regularizer=L2_REGULATOR)(inputs)
         
-        flat = tf.keras.layers.Flatten(input_shape = IMAGE_SIZE, batch_size=BATCH_SIZE)(inputs)
+        flat = tf.keras.layers.Flatten(input_shape = IMAGE_SIZE, batch_size=BATCH_SIZE)(conv)
         #*bowel 
 
         bowel1 = tf.keras.layers.Dense(units = 64, activation = tf.keras.activations.selu, kernel_regularizer=L2_REGULATOR)(flat)
