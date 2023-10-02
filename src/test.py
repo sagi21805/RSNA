@@ -1,9 +1,10 @@
-import time
+import numpy as np
 
-x = 0
-t = time.time()
-for i in range(1000000):
-    for j in range(1000000):
-        x += i *j
-print(time.time() - t)
-print(x)
+
+import tensorflow as tf
+
+print(tf.__version__)
+
+model = tf.keras.models.load_model("/home/sagi/Desktop/VsCode/Competiton/MODEL/test_model.keras")
+
+print(model.summary())

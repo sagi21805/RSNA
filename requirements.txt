@@ -1,4 +1,3 @@
-tensorflow[and-cuda]
 pydicom
 pandas
 numpy

@@ -2,11 +2,11 @@ import tensorflow as tf
 
 IMAGE_SIZE = [256, 256]
 
-BATCH_SIZE = 256
+BATCH_SIZE = 128
 
 RESIZE_DIM = 256
 
-EPOCHS = 3
+EPOCHS = 5
 
 TARGET_CLASSES = [
     
@@ -26,4 +26,4 @@ TRAIN_IMG_PATH = "/home/sagi/Desktop/VsCode/Competiton/DATA/rsna_256x256_jpeg_fi
 
 TESTING_IMAGES_PATH = r"C:\VsCode\competitions\RSNA 2023 Abdominal Trauma Detection\test_images" #"/kaggle/input/rsna-2023-abdominal-trauma-detection/test_images"
 
-L2_REGULATOR = tf.keras.regularizers.l2(0.1)
+L2_REGULATOR = tf.keras.regularizers.l2(0.3)
