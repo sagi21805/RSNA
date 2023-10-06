@@ -7,14 +7,13 @@ class MyList(list):
                 r.append(i + j)
         
         if type(obj) == int:
-            r = MyList([])
             for i in self:
                 r.append(i + obj)
                 
         return r
-            
-l = MyList([1, 2, 3])
-k = MyList([2, 3, 4])
-j = [1, 2, 3]
+    
+dict = {"1": 1,
+        "2": 2}
 
-print(k+ 1)
+print(len(dict))
+

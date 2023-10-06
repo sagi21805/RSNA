@@ -9,7 +9,7 @@ from config import EPOCHS
 model = CNNModel().to('cuda')
 
 # Define loss function and optimizer
-criterion = nn.BCEWithLogitsLoss()  # Use BCEWithLogitsLoss for binary classification
+loss_func = nn.BCEWithLogitsLoss()  # Use BCEWithLogitsLoss for binary classification
 optimizer = torch.optim.Adam(model.parameters())
 
 
@@ -28,10 +28,10 @@ for epoch in range(EPOCHS):
         images = images.to('cuda')
         labels = labels.to('cuda')
         outputs = model(images)
-        loss = criterion(outputs, labels)
+        loss = loss_func(outputs, labels)
+        print(loss)
         loss.backward()
         optimizer.step()
-        print(loss)
 
     print(f"Epoch [{epoch+1}/{EPOCHS}] - Loss: {loss:.4f}")
     

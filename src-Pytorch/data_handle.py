@@ -2,16 +2,11 @@ import os
 import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
-from PIL import Image
-import torch.optim as optim
-from torch import nn
 from config import TRAIN_IMG_PATH, SHUFFLE, TARGET_CLASSES, TRAIN_LABEL_PATH, BATCH_SIZE
 
 import cv2
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
-from sklearn.model_selection import train_test_split
 
 
 
@@ -19,10 +14,13 @@ train_data = pd.read_csv(TRAIN_LABEL_PATH)
 id_label_dict = {label[0]: label[1:-1] for label in train_data[TARGET_CLASSES].values}
 train_img_paths = []
 train_labels = []
+print(len( os.listdir(TRAIN_IMG_PATH)))
 for patient_id in os.listdir(TRAIN_IMG_PATH):
     for img_path in os.listdir(TRAIN_IMG_PATH + "/" + patient_id):
         train_img_paths.append(TRAIN_IMG_PATH + "/" + patient_id + "/" + img_path)
         train_labels.append(id_label_dict[int(train_img_paths[-1].split("/")[-2])]) 
+        
+    
 
 
 
@@ -39,13 +37,13 @@ class CustomDataset(Dataset):
         return len(self.paths)
 
     def __getitem__(self, idx):
-        image = torch.tensor(cv2.cvtColor(cv2.imread(self.paths[idx]), cv2.COLOR_BGR2GRAY), dtype=torch.float32)
+        image = torch.tensor(cv2.cvtColor(cv2.imread(self.paths[idx]), cv2.COLOR_BGR2RGB), dtype=torch.float32) / 255
         label = torch.tensor(self.labels[idx], dtype=torch.float32)
 
         if self.transform:
             image = self.transform(image)
 
-        return image, label
+        return image.view(3, 256, 256), label
 
 # Define any image transformations you want to apply, here we also add augmentation. 
 transform = transforms.Compose([
@@ -57,7 +55,8 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-
+print(len(train_img_paths))
+print(len(train_labels))
 # Create the datasets
 def get_dataset():
     dataset_train = CustomDataset(train_img_paths, train_labels)

@@ -1,14 +1,15 @@
 from python import Python
 from tensor import Tensor
 
-fn func(img: PythonObject, stride: Int8, thresh: Int64) raises:
+def func(img: PythonObject, stride: Int8, thresh: Int64) -> PythonObject:
     let numpy = Python.import_module("numpy")
     let blocked = numpy.lib.stride_tricks.sliding_window_view(img, stride)
-    let new = numpy.zeros((blocked.shape[0], blocked.shape[1]), dtype = numpy.uint8)
+    var new = numpy.zeros((blocked.shape[0], blocked.shape[1]))
     for i in range(blocked.shape[0]):
         for j in range(blocked.shape[1]):
             if numpy.sum(blocked[i][j]) > thresh:
-                new[i][j] = 255
+                # new[i][j] = 255
+                pass
     return new
 
 fn main() raises:

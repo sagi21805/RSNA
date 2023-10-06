@@ -17,9 +17,9 @@ TARGET_CLASSES = [
     ]
 
 
-TRAIN_LABEL_PATH = "/home/sagi/Desktop/VsCode/Competiton/RSNA-2023/train.csv"
+TRAIN_LABEL_PATH = "/home/sagi/VsCode/competitions/RSNA/data/train.csv"  #"/home/sagi/Desktop/VsCode/Competiton/RSNA-2023/train.csv" 
 
-TRAIN_IMG_PATH = "/home/sagi/Desktop/VsCode/Competiton/DATA/rsna_256x256_jpeg_filtered"
+TRAIN_IMG_PATH = "/mnt/c/rsna_256x256_jpeg_filtered/" #"/home/sagi/Desktop/VsCode/Competiton/DATA/rsna_256x256_jpeg_filtered"
 
 TESTING_IMAGES_PATH = r"C:\VsCode\competitions\RSNA 2023 Abdominal Trauma Detection\test_images" #"/kaggle/input/rsna-2023-abdominal-trauma-detection/test_images"
 
