@@ -12,8 +12,12 @@ class MyList(list):
                 
         return r
     
-dict = {"1": 1,
-        "2": 2}
+def f(i):
+    if i <= 1:
+        return i
+    
+    return i + f(i-1)
+   
 
-print(len(dict))
+print(f(4))
 
