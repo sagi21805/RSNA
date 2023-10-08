@@ -4,6 +4,7 @@ from model import CNNModel
 from data_handle import get_dataset
 from config import EPOCHS
 
+print(torch.cuda.is_available())
 
 # Instantiate the model
 model = CNNModel().to('cuda')

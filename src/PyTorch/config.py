@@ -17,7 +17,7 @@ TARGET_CLASSES = [
     ]
 
 
-TRAIN_LABEL_PATH = "/home/sagi/VsCode/competitions/RSNA/data/train.csv"  #"/home/sagi/Desktop/VsCode/Competiton/RSNA-2023/train.csv" 
+TRAIN_LABEL_PATH = "/home/sagi/Desktop/vscode/RSNA/data-csv/train.csv"  #"/home/sagi/Desktop/VsCode/Competiton/RSNA-2023/train.csv" 
 
 TRAIN_IMG_PATH = "/mnt/c/rsna_256x256_jpeg_filtered/" #"/home/sagi/Desktop/VsCode/Competiton/DATA/rsna_256x256_jpeg_filtered"
 
